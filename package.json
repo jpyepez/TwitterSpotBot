@@ -1,0 +1,15 @@
+{
+  "name": "twitterbot",
+  "version": "1.0.0",
+  "description": "p5js twitter bot",
+  "main": "app.js",
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app.js"
+  },
+  "author": "JP Yepez",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.10"
+  }
+}
