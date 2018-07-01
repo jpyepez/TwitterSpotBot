@@ -1,6 +1,7 @@
 
-# Files #
-#########
+# Files/Folders #
+#################
+node_modules/
 config.js
 
 # Compiled source #
