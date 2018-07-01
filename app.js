@@ -1,24 +1,39 @@
 /*jshint esversion: 6 */
 
-const Twit = require('twit');
-const config = require('./config');
+const Twit 		= require('twit'),
+      config 	= require('./config'),
+      exec 		= require('child_process').exec,
+      fs 			= require('fs');
 
 console.log("TwitterBot started");
-// console.log(config);
+const cmd = "processing-java --sketch=`pwd`/SpotBot --run";
 
 const T = new Twit(config);
-//console.log(T);
 
 newTweet();
-setInterval(newTweet, 1000*20);
+// setInterval(newTweet, 1000*20);
 
 function newTweet() {
-    let newRNG = Math.floor(Math.random()*100);
+    exec(cmd, createAndUploadImage);
+}
 
-    let tweet = {status: `I just rolled a new number... It's ${newRNG}`};
+function createAndUploadImage() {
+    console.log("SpotBot image generated!");
+    let filename = 'SpotBot/output.png';
+    let b64image = fs.readFileSync(filename, {encoding: 'base64'});
 
-    T.post('statuses/update', tweet, function(err, data, response) {
-        console.log(data);
+    T.post('media/upload', {media_data: b64image}, tweetImage);
+}
+
+function tweetImage(err, data, response) {
+    let id = data.media_id_string;
+    let date = new Date().toDateString();
+    let statusText = `Generated: ${date}\n#processing #generativeart #creativecoding`;
+
+    let tweet = {status: statusText,
+                 media_ids: [id]};
+
+    T.post('statuses/update', tweet, (err, data, response) => {
         if(err) {
             console.log("Something went wrong!");
         } else {

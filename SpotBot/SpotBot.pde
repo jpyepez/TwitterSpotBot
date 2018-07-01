@@ -1,25 +1,23 @@
 import java.util.*;
 import com.hamoid.*;
 
-VideoExportClass vec;
-
 SpotSysGaussian spotSystem;
 
 void setup(){
   size(1080, 1080);
   background(255);
 
-  //vec = new VideoExportClass(this, "painterbot.mp4");
   resetSketch();
+  save("output.png");
+  exit();
 }
 
 void draw(){
-  //vec.saveMovieToggle();
+  // no draw loop
 }
 
 void mouseReleased() {
   resetSketch();
-  // saveFrame("spotbot+######.jpg");
 }
 
 void resetSketch() {
@@ -30,13 +28,6 @@ void resetSketch() {
 
   background(255);
   addSpots((int)random(150, 250));
-}
-
-void keyReleased() {
-  if(key == ' ') {
-    // vec.toggleRecording();
-    // saveFrame("spotbot+######.jpg");
-  }
 }
 
 void addSpots(int times) {
