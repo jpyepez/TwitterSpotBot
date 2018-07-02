@@ -10,7 +10,7 @@ const cmd = "processing-java --sketch=`pwd`/SpotBot --run";
 
 const T = new Twit(config);
 
-// newTweet();
+newTweet();
 setInterval(newTweet, 8.64e+7);
 
 function newTweet() {
