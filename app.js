@@ -1,14 +1,23 @@
 /*jshint esversion: 6 */
 
 const Twit 		= require('twit'),
-      config 	= require('./config'),
+      // config 	= require('./config'),
       exec 		= require('child_process').exec,
       fs 			= require('fs');
 
 console.log("TwitterBot started");
 const cmd = "processing-java --sketch=`pwd`/SpotBot --run";
 
-const T = new Twit(config);
+// local
+// const T = new Twit(config);
+
+// heroku
+const T = new Twit({
+    consumer_key: 				process.env.SB_CONSUMER_KEY,
+    consumer_secret:			process.env.SB_CONSUMER_SECRET,
+    access_token:					process.env.SB_ACCESS_TOKEN,
+    access_token_secret:	process.env.SB_TOKEN_SECRET
+});
 
 newTweet();
 setInterval(newTweet, 8.64e+7);
