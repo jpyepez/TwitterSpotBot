@@ -23,7 +23,7 @@ class Spot {
 
   void recCircle(PVector newLoc, float newRad, int subCircles) {
     noStroke();
-    fill(0, 5);
+    fill(0, 4);
     ellipse(newLoc.x, newLoc.y, newRad, newRad);
     if(newRad > radius/5) {
       for(int i = 0; i < subCircles; i++) {

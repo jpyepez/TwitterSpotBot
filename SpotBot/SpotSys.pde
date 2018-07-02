@@ -2,13 +2,8 @@ class SpotSys {
 
   ArrayList<Spot> spots;
 
-  int sides;
-  float radius;
-
-  SpotSys(int sides_, float radius_) {
+  SpotSys() {
     spots = new ArrayList<Spot>();
-    sides = sides_;
-		radius = radius_;
   }
 
   void update() {
@@ -27,7 +22,7 @@ class SpotSys {
     }
   }
 
-  void add(PVector newLoc) {
+  void add(PVector newLoc, int sides, float radius) {
     spots.add(new Spot(newLoc, sides, radius));
   }
 

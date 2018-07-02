@@ -8,30 +8,61 @@ void setup(){
   background(255);
 
   resetSketch();
-  save("output.png");
-  exit();
+  saveAndExit();
 }
 
 void draw(){
   // no draw loop
 }
 
-void mouseReleased() {
-  resetSketch();
+////////////
+// Functions
+void resetSketch() {
+  background(255);
+
+  int systemType = (int) random(0, 2);
+  createSystem(systemType);
 }
 
-void resetSketch() {
+void saveAndExit(){
+  save("output.png");
+  exit();
+}
+
+void createSystem(int type) {
+  switch(type) {
+  case 0:	
+    createGaussianSystem();
+    break;
+  case 1:	
+    createGaussianSystemRndRadius();
+    break;
+  default:
+    break;
+  }
+}
+
+void createGaussianSystem() {
   float stdDev = random(150, 250);
   int numSides = int(random(2, 7));
-  float radius = random(20, 50);
-  spotSystem = new SpotSysGaussian(stdDev, numSides, radius);
-
-  background(255);
-  addSpots((int)random(150, 250));
+  float radius = random(15, 40);
+  spotSystem = new SpotSysGaussian(stdDev);
+  spotSystem.addMany((int)random(150, 400),
+                     numSides,
+                     radius/constrain(0.25*numSides, 1, 10));
 }
 
-void addSpots(int times) {
-  for(int i = 0; i < times; i++) {
-    spotSystem.addGaussian();
-  }
+void createGaussianSystemRndRadius() {
+  float stdDev = random(150, 250);
+  int numSides = int(random(2, 7));
+  spotSystem = new SpotSysGaussian(stdDev);
+  spotSystem.addManyRndRadius((int)random(150, 400),
+                     numSides,
+                     15, 40);
+}
+
+////////////
+// Callbacks
+void mouseReleased() {
+  resetSketch();
 }
